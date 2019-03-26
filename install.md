@@ -1,5 +1,6 @@
 
 [openSUSE doc](https://doc.opensuse.org/documentation/leap/tuning/html/book.sle.tuning/cha.tuning.systemtap.html)
+[sourceware doc](https://sourceware.org/systemtap/SystemTap_Beginners_Guide/)
 
 1. enable `debuginfo repo` in yast
 1. install systemtp and kernel debuginfo
@@ -14,3 +15,6 @@ hello world
 10.46user 1.23system 0:12.03elapsed 97%CPU (0avgtext+0avgdata 100040maxresident)k
 24inputs+12368outputs (2major+843059minor)pagefaults 0swaps
 ```
+
+
+

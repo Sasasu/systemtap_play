@@ -1,0 +1,7 @@
+// https://github.com/larytet/SystemTap/blob/master/tapset/linux/vfs.stp#L1232
+probe vfs.open.return {
+    time = gettimeofday_us()-@entry(gettimeofday_us())
+    // pathname defien in vfs.open.return.
+    printf("%s(%d): %s took %6dus\n", execname(), pid(), pathname, time)
+}
+
