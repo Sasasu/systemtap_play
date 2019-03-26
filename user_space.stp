@@ -1,0 +1,15 @@
+// doc: https://sourceware.org/systemtap/SystemTap_Beginners_Guide/userspace-probing.html
+// test: grep UPROBE /boot/config-`uname -r`
+// use `gcc user_space.c -o user_space.out -g` to complie user_space.c
+
+probe process("user_space.out").function("main") {
+    printf("enter main\n")
+}
+
+probe process("user_space.out").function("get_str") {
+    printf("enter get_str, parms %s len %d\n", user_string($str), $len);
+}
+
+probe process("user_space.out").function("get_str").return {
+    printf("leave get_str, return %s\n", user_string($return))
+}
