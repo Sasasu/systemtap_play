@@ -1,0 +1,7 @@
+function hello_from_function(who) {
+    printf("hello %s\n", who)
+}
+probe begin {
+    hello_from_function("systemtap")
+    exit()
+}
