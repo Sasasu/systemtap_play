@@ -1,0 +1,28 @@
+function filter_target() {
+    if (target() == 0) return 0;
+    if (!target_set_pid(pid())) return 1;
+    return 0;
+}
+
+
+probe process(@1).function("*") {
+    if(filter_target()) next
+    _a = uaddr()
+    printf("USR %s -> %s@%s:%s\n", thread_indent(1), usymname(_a), usymfile(_a), usymfileline(_a));
+}
+
+probe process(@1).function("*").return {
+    if(filter_target()) next
+    _a = uaddr()
+    printf("USR %s <- %s@%s:%s\n", thread_indent(-1), usymname(_a), usymfile(_a), usymfileline(_a));
+}
+
+probe nd_syscall.* {
+    if(filter_target()) next
+    printf("SYS %s -> %s\n", thread_indent(1), name)
+}
+
+probe nd_syscall.*.return {
+    if(filter_target()) next
+    printf("SYS %s <- %s\n", thread_indent(-1), name)
+}
